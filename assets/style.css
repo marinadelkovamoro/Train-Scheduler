@@ -1,0 +1,23 @@
+body{
+    background-color: whitesmoke;
+}
+
+.train-scheduler {
+    text-align: center;
+    background-color: rgb(185, 132, 62);
+    margin: 10px;
+    padding: 40px;
+}
+
+.card {
+    margin: 10px;
+}
+
+.card-header {
+    background-color: rgb(44, 98, 179);
+    color: white;
+}
+
+.bold {
+    font-weight: bold;
+}
