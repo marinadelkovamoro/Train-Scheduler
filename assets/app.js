@@ -26,13 +26,12 @@ $("#add-train-btn").on("click", function (event) {
   var firstTrainTime = $("#InputFirstTrainTime").val().trim();
   var frequency = $("#InputFrequency").val().trim();
 
-
   // Creates local "temporary" object for holding employee data
   var newTrain = {
     name: trainName,
     destination: destination,
+    frequency: frequency,
     firstTrain: firstTrainTime,
-    frequency: frequency
   };
 
   // Uploads employee data to the database
@@ -41,26 +40,26 @@ $("#add-train-btn").on("click", function (event) {
   // Logs everything that was input to the console
   console.log(newTrain.name);
   console.log(newTrain.destination);
-  console.log(newTrain.firstTrain);
   console.log(newTrain.frequency);
+  console.log(newTrain.firstTrain);
 
   // to clear all of the inputs in the input fields
   $("#InputTrainName").val("");
   $("#InputDestination").val("");
-  $("#InputFirstTrainTime").val("");
   $("#InputFrequency").val("");
+  $("#InputFirstTrainTime").val("");
 
 });
 
-// Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+// Create Firebase event for adding new trains to the database and a row in the html each time a user adds an entry
 database.ref().on("child_added", function (childSnapshot) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
   var trainName = childSnapshot.val().name;
   var destination = childSnapshot.val().destination;
-  var firstTrainTime = childSnapshot.val().firstTrain;
   var frequency = childSnapshot.val().frequency;
+  var firstTrainTime = childSnapshot.val().firstTrain;
 
   // Log train Info
   console.log(trainName);
@@ -68,16 +67,14 @@ database.ref().on("child_added", function (childSnapshot) {
   console.log(firstTrainTime);
   console.log(frequency);
 
-
   // Create the new row for each train added
   var newRow = $("<tr>").append(
     $("<td>").text(trainName),
     $("<td>").text(destination),
-    $("<td>").text(firstTrainTime),
-    $("<td>").text(frequency)
+    $("<td>").text(frequency),
+    $("<td>").text(firstTrainTime)
   );
 
   // Append the new row to the table
   $(".table > tbody").append(newRow);
 });
-
