@@ -43,5 +43,12 @@ $("#add-train-btn").on("click", function(event) {
   console.log(newTrain.destination);
   console.log(newTrain.firstTrain);
   console.log(newTrain.frequency);
+
+  // to clear all of the inputs in the input fields
+  $("#InputTrainName").val("");
+  $("#InputDestination").val("");
+  $("#InputFirstTrainTime").val("");
+  $("#InputFrequency").val("");
+
 });
 
