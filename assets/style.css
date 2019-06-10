@@ -21,3 +21,10 @@ body{
 .bold {
     font-weight: bold;
 }
+
+.currentTime{
+    background-color: rgb(228, 214, 15);
+    text-align: center;
+    border-radius: 20px;
+    border: 2px solid black;
+}

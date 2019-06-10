@@ -1,7 +1,8 @@
 console.log("This works!");
 
 // Current time
-var currentTime = moment();
+var currentTime = moment().format("HH:mm");
+$("#current-time").text(currentTime);
 console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm A"));
 
 
@@ -30,8 +31,6 @@ $("#add-train-btn").on("click", function (event) {
   var destination = $("#InputDestination").val().trim();
   var firstTrainTime = $("#InputFirstTrainTime").val().trim();
   var frequency = $("#InputFrequency").val().trim();
-
-  
 
 
   // Creates local "temporary" object for holding employee data
@@ -69,8 +68,11 @@ database.ref().on("child_added", function (childSnapshot) {
   var frequency = childSnapshot.val().frequency;
   var firstTrainTime = childSnapshot.val().firstTrain;
 
+  // Convert the firstTrainTime - so that it has a meaning/object of time and I subtract one day so that firstTrainTime is always before the current time
+  var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "day");
+  
   // compute the difference in time from 'now' and the first train using UNIX timestamp, store in var and convert to minutes
-  var trainDiff = moment().diff(moment.unix(0), "minutes");
+  var trainDiff = moment().diff(moment(firstTimeConverted), "minutes");
 
   // get the remainder of time by using 'moderator' with the frequency & time difference, store in var
   var trainRemainder = trainDiff % frequency;
